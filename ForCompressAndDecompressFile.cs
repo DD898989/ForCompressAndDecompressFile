@@ -38,9 +38,6 @@ namespace ForCompressAndDecompressFile
                 BWT.Encode(ref encodedArray); //ref for array is necessary if size changed
 
                 RLC.Encode(ref encodedArray);
-
-                ByteArray_To_CSharpTextFile(encodedArray, sourceFile + ".encoded.cs");
-
                 //----------------------------------------------------
                 //----------------------------------------------------
                 //----------------------------------------------------
@@ -49,9 +46,14 @@ namespace ForCompressAndDecompressFile
                 RLC.Decode(ref decodedArray);
                 BWT.Decode(ref decodedArray);
                 if (sourceArray.SequenceEqual(decodedArray))
+                {
+                    ByteArray_To_CSharpTextFile(encodedArray, sourceFile + ".encoded.cs");
                     throw (new Exception("TEST DECODE OK"));
+                }
                 else
+                {
                     throw (new Exception("TEST DECODE FAIL"));
+                }
                 //----------------------------------------------------
             }
             else  //                           ########## decode process #########
